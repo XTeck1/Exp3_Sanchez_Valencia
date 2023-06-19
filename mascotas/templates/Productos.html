@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="icon" href="{% static 'img/brandlogito2.0.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+    <title>Productos</title>
+</head>
+<body class="body">
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a href="{% url 'index' %}" class="navbar-brand">
+            <img src="{% static 'img/brandlogito2.0.png' %}" height="80px" width="80px">
+        </a>
+
+        
+        <div class="collapse navbar-collapse" id="opciones">
+            <ul class="navbar-nav">
+
+                
+                <li id="mision" class="nav-item">
+                    <a class="nav-link" href="{% url 'mision' %}">Nuestra mision</a>
+                </li>
+
+                <li id="productos" class="nav-item">
+                    <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                </li>
+
+                <li id="voluntariado" class="nav-item">
+                    <a class="nav-link" href="{% url 'voluntariado' %}">Inscripcion voluntariado</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <!--Aqui van los cambios si esta logeado-->
+                <li id="stock" class="nav-item">
+                    <a class="nav-link" href="{% url 'registroStock' %}">Stock</a>
+                </li>
+                {% endif %}
+            </ul>
+            <!--buscador web-->
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" aria-label="Search" onmouseover="colorBuscar(this)" onmouseout="colorBuscarOut(this)">
+                <button class="btn btn-light my-2 my-sm-0" type="submit" id="btnBuscar" onmouseover="colorBotonBuscar(this)" onmouseout="colorBotonBuscarOut(this)">Buscar</button>         
+            </form>
+        </div>
+
+        <div style="padding-right: 30px;">
+            {% if user.is_authenticated %}
+
+            <button class="Btn">
+  
+                <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+                
+                <div class="text"><a style="text-decoration: none; color: black;" href="{% url 'logout' %}">Cerrar sesión</a></div>
+                
+            </button>
+
+
+            {% else %}
+            
+            <button class="Btn">
+  
+                <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+                
+                <div class="text"><a style="text-decoration: none; color: black;" href="{% url 'login' %}">Iniciar sesión</a></div>
+                
+            </button>
+            
+
+            {% endif %}
+        </div>
+
+        <div class="reloj">
+            <p class="tiempo" id="clock"></p>
+        </div>
+
+    </nav>
+
+    <br><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/bandaperro.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$1.490</h3>
+                    <div class="card-body">
+                        <h4>Bandanas</h4>
+                        <p class="card-text">
+                             Las bandanas estan hechas de algodón, poliéster o seda y pueden presentar diferentes diseños, colores y estampados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/pelotajpg.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$2.490</h3>
+                    <div class="card-body">
+                        <h4>Pelota goma</h4>
+                        <p class="card-text">
+                            Pelota de goma con función de mordedor para estimular el crecimiento de los dientes de nuestras mascotas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/correas.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$3.890</h3>
+                    <div class="card-body">
+                        <h4>Arnes y correas</h4>
+                        <p class="card-text">
+                            Correas y arnes de cuero en todo los colores para diferentes tipos de mascotas,ya sea hurón,perros,gatos,etc.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/dogshamp.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$4.990</h3>
+                    <div class="card-body">
+                        <h4>Champion Dog</h4>
+                        <p class="card-text">
+                            Alimento para cachorros marca Champion Dog sabor carne,pollo y leche de 3 KG.Contiene Omega 3 y prebióticos
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/jaula.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$17.490</h3>
+                    <div class="card-body">
+                        <h4>Jaula</h4>
+                        <p class="card-text">
+                            Jaula para perros mediano-grande de plástico desmontable con barrotes metalicos
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/camas.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$13.490</h3>
+                    <div class="card-body">
+                        <h4>Camas</h4>
+                        <p class="card-text">
+                        Cama de poliester acolchada marca marpint para perros o gatos + plato relentizador de regalo 
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/cepi.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$1.890</h3>
+                    <div class="card-body">
+                        <h4>Guante Tipo Cepillo</h4>
+                        <p class="card-text">
+                            Par de guantes tipo cepillo de todos los colores,perfectos para combinar el cariño con la limpieza.
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-3 margentarjeta">
+                <div class="card text-center">
+                    <img class="card-img-top" src="{% static 'img/coches.jpg' %}">
+                    <br>
+                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
+                    <h3>$34.990</h3>
+                    <div class="card-body">
+                        <h4>Coche</h4>
+                        <p class="card-text">
+                            Coche de paseo color negro para animales, con enganche para collar, material impermeable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    <footer class="piepagina">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-2">
+                    <strong style="color: black;">Síguenos</strong>
+                <br><br>
+                <a class="a" href="https://www.facebook.com"><img src="{% static 'img/facebook.png' %}" height="40px" width="40px"><strong class="strong">Facebook</strong></a>   
+                <br><br>
+                <a class="a" href="https://www.instagram.com/"><img src="{% static 'img/instagram.png' %}" height="40px" width="40px"><strong class="strong">Instagram</strong></a>
+                <br><br>
+                <a class="a" href="https://www.twitter.com"><img src="{% static 'img/gorjeo.png' %}" height="40px" width="40px"><strong class="strong">Twitter</strong></a>    
+                </div>
+            
+                <div class="col-lg-1">
+                    <a class="a" href="{% url 'index' %}"><Strong>Inicio</Strong></a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="a" href="{% url 'mision' %}"><Strong>Nuestra misión</Strong></a>
+                </div>
+                <div class="col-lg-1">
+                    <a class="a" href="{% url 'productos' %}"><strong>Productos</strong></a>
+                </div>
+                <div class="col-lg-1">
+                    <a class="a" href="{% url 'voluntariado' %}"><strong>Inscripcion voluntariado</strong></a>
+                </div>
+                <div class="col-lg-2">
+                    <img class="img-fluid" src="{% static 'img/webpay.png' %}" width="350px">
+                </div>
+                <div class="col-lg-2">
+                    <p style="text-align: right; margin-top: 200px; color: whitesmoke;">
+                        @Copyright Derechos reservados 
+                    </p>
+                </div>   
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/funciones.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+</body>
+</html>
