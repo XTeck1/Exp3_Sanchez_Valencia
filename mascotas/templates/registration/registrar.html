@@ -30,10 +30,14 @@
             <ul class="navbar-nav">
                 <!--Aqui van los cambios si esta logeado-->
                 {% if user.is_staff %}
+                <li id="productos" class="nav-item">
+                    <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                </li>
+
                 <li id="sstock" class="nav-item">
                     <a class="nav-link" href="{% url 'registroStock' %}">Stock</a>
                 </li>
-                {% endif %}
+                {% else %}
 
                 <li id="productos" class="nav-item">
                     <a class="nav-link" href="{% url 'productos' %}">Productos</a>
@@ -46,9 +50,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:white">Bienvenid@ {{ user.username }}</a>
                 </li>
+                {% endif %}
             </ul>
             {% else %}
-            <ul>
+            <ul class="navbar-nav">
                 <li id="mision" class="nav-item">
                     <a class="nav-link" href="{% url 'mision' %}">Nuestra mision</a>
                 </li>
