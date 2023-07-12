@@ -42,9 +42,29 @@
 
         
         <div class="collapse navbar-collapse" id="opciones">
+            {% if user.is_authenticated %}
             <ul class="navbar-nav">
+                <!--Aqui van los cambios si esta logeado-->
+                {% if user.is_staff %}
+                <li id="sstock" class="nav-item">
+                    <a class="nav-link" href="{% url 'registroStock' %}">Stock</a>
+                </li>
+                {% endif %}
 
-                
+                <li id="productos" class="nav-item">
+                    <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                </li>
+
+                <li id="carroCompras" class="nav-item">
+                    <a class="nav-link" href="{% url 'carrito' %}">Ir al carrito</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:white">Bienvenid@ {{ user.username }}</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul>
                 <li id="mision" class="nav-item">
                     <a class="nav-link" href="{% url 'mision' %}">Nuestra mision</a>
                 </li>
@@ -56,14 +76,8 @@
                 <li id="voluntariado" class="nav-item">
                     <a class="nav-link" href="{% url 'voluntariado' %}">Inscripcion voluntariado</a>
                 </li>
-
-                {% if user.is_authenticated %}
-                <!--Aqui van los cambios si esta logeado-->
-                <li id="stock" class="nav-item">
-                    <a class="nav-link" href="{% url 'registroStock' %}">Stock</a>
-                </li>
-                {% endif %}
             </ul>
+            {% endif %}
             <!--buscador web-->
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" aria-label="Search" onmouseover="colorBuscar(this)" onmouseout="colorBuscarOut(this)">
@@ -102,6 +116,7 @@
         </div>
 
     </nav>
+
     <br><br>
     <div class="table-responsive">
         <h2 class="text-center">Lista de voluntarios</h2>

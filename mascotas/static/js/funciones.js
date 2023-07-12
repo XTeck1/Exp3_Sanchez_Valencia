@@ -66,6 +66,39 @@ $(document).ready(function(){
         });
     });
 
+    $(function(){
+        $("#formUsuario").validate({
+            rules:{
+                username: "required",
+                first_name: "required",
+                last_name: "required",
+                email: "required",
+                password1: "required",
+                password2: "required",
+            },
+            messages:{
+                username:{
+                    required: 'Ingrese un nombre de usuario',
+                },
+                first_name:{
+                    required: 'Ingrese su nombre',
+                },
+                last_name:{
+                    required: 'Ingrese su apellido',
+                },
+                email:{
+                    required: 'Ingrese un email',
+                },
+                password1:{
+                    required: 'Ingrese una contraseña',
+                },
+                password2:{
+                    required: 'Confirme la contraseña',
+                },
+            }
+        });
+    });
+
 
     var cambio = false;
 

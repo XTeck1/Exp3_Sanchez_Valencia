@@ -15,10 +15,11 @@ class RegistroUserForm(UserCreationForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['codigo', 'nombre', 'precio', 'stock', 'imagen', 'categoria']
+        fields = ['codigo', 'nombre','descripcion', 'precio', 'stock', 'imagen', 'categoria']
         labels = {
             'codigo' : 'Codigo',
             'nombre' : 'Nombre',
+            'descripcion' : 'Descripcion',
             'precio' : 'Precio',
             'stock' : 'Stock',
             'imagen' : 'Imagen',
@@ -37,6 +38,13 @@ class ProductoForm(forms.ModelForm):
                     'placeholder' : 'Ingrese el nombre',
                     'class' : 'form-control',
                     'id' : 'nombre'
+                }
+            ),
+            'descripcion' : forms.TextInput(
+                attrs = {
+                    'placeholder' : 'Ingrese una descripcion',
+                    'class' : 'form-control',
+                    'id' : 'descripcion'
                 }
             ),
             'precio' : forms.TextInput(

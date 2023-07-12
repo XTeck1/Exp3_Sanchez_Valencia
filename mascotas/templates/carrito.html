@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar</title>
     {% load static %}
     <link rel="icon" href="{% static 'img/brandlogito2.0.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <title>Carro de compras</title>
 </head>
-<body class="body">
+<body>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 
@@ -26,6 +23,8 @@
 
         
         <div class="collapse navbar-collapse" id="opciones">
+
+
             {% if user.is_authenticated %}
             <ul class="navbar-nav">
                 <!--Aqui van los cambios si esta logeado-->
@@ -34,17 +33,12 @@
                     <a class="nav-link" href="{% url 'registroStock' %}">Stock</a>
                 </li>
                 {% endif %}
-
                 <li id="productos" class="nav-item">
                     <a class="nav-link" href="{% url 'productos' %}">Productos</a>
                 </li>
 
                 <li id="carroCompras" class="nav-item">
                     <a class="nav-link" href="{% url 'carrito' %}">Ir al carrito</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:white">Bienvenid@ {{ user.username }}</a>
                 </li>
             </ul>
             {% else %}
@@ -101,27 +95,50 @@
 
     </nav>
 
-    {% load crispy_forms_tags %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Registro de Usuario</h2>
-                        <hr>
-                        <form id="formUsuario" action="#" method="POST">
-                            {% csrf_token %}
-                            {{ form | crispy}}
-                            <a href="{% url 'index' %}">Inicio</a> | 
-                            <a href="{% url 'login' %}">Login</a>
-                            <input type="submit" value="Registrar" class="btn btn-success" style="float:right">
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div role="alert">
+        <table class="table table-bordered alert alert-warning">
+            <thead>
+                <tr scope="row" class="text-center"><td colspan="3" style="font-weight: bold; font-size: 18px;">Carro de compras</td></tr>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">PRODUCTO</td>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">PRECIO</td>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">CANTIDAD</td>
+            </thead>
+            <tbody>
+                {% if request.session.carrito.items %}
+                    {% for key, value in request.session.carrito.items %} 
+                        <tr>
+                            <td style="font-size:13px">{{ value.nombre }}</td>
+                            <td style="font-size:13px">{{ value.precio }}</td>
+                            <td style="font-size:13px">{{ value.cantidad }}
+                                <br>
+                                <a href="{% url 'agregar' value.producto_id %}" class="badge btn btn-primary">+</a>
+                                <a href="{% url 'restar'  value.producto_id %}" class="badge btn btn-warning">-</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total : </th>
+                            <td colspan="2">$ {{value.total}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-info text-center" style="font-weight: bold;">Sin Productos</div>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+    <div class="row text-center">
+        <div class="col-6">
+            <a href="{% url 'limpiar' %}" class="btn btn-outline-warning">Limpiar</a> 
+           </div> 
+           <div class="col-6">
+            <a href="{% url 'generarBoleta' %}" class="btn btn-outline-primary">Comprar</a>
         </div>
     </div>
 
-    <script src="{% static 'js/funciones.js' %}"></script>
 </body>
 </html>
