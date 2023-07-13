@@ -17,7 +17,7 @@ def mision(request):
 
 def productos(request):
     productos = Producto.objects.all()
-    elementos_por_pagina = 10
+    elementos_por_pagina = 8
     paginator = Paginator(productos, elementos_por_pagina)
     page = request.GET.get('page')
     productos_paginados = paginator.get_page(page)

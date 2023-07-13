@@ -136,108 +136,21 @@
 
             <div id="paginacion" class="pagination">
                 <span class="step-links">
+                    <div style="margin-left: 550px;">
                     {% if productos.has_previous %}
-                    <a href="?page=1">&laquo; Primera</a>
-                    <a href="?page={{ productos.previous_page_number }}">Pagina anterior</a>
+                    <a class="button btn btn-dark" href="?page=1">&laquo; Primera</a>
+                    <a class="button btn btn-dark" href="?page={{ productos.previous_page_number }}">Pagina anterior</a>
                     {% endif %}
 
                     <span class="current-page">{{ productos.number }}</span>
 
                     {% if productos.has_next %}
-                    <a href="?page={{ productos.next_page_number }}">Siguiente</a>
-                    <a href="?page={{ productos.paginator.num_pages }}">Ultima &raquo;</a>
+                    <a class="button btn btn-dark" href="?page={{ productos.next_page_number }}">Siguiente</a>
+                    <a class="button btn btn-dark" href="?page={{ productos.paginator.num_pages }}">Ultima &raquo;</a>
                     {% endif %}
+                    </div>
 
                 </span>
-            </div>
-            
-            
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/dogshamp.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$4.990</h3>
-                    <div class="card-body">
-                        <h4>Champion Dog</h4>
-                        <p class="card-text">
-                            Alimento para cachorros marca Champion Dog sabor carne,pollo y leche de 3 KG.Contiene Omega 3 y prebióticos
-                        </p>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/jaula.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$17.490</h3>
-                    <div class="card-body">
-                        <h4>Jaula</h4>
-                        <p class="card-text">
-                            Jaula para perros mediano-grande de plástico desmontable con barrotes metalicos
-                        </p>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/camas.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$13.490</h3>
-                    <div class="card-body">
-                        <h4>Camas</h4>
-                        <p class="card-text">
-                        Cama de poliester acolchada marca marpint para perros o gatos + plato relentizador de regalo 
-                        </p>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/cepi.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$1.890</h3>
-                    <div class="card-body">
-                        <h4>Guante Tipo Cepillo</h4>
-                        <p class="card-text">
-                            Par de guantes tipo cepillo de todos los colores,perfectos para combinar el cariño con la limpieza.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/cepi.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$1.890</h3>
-                    <div class="card-body">
-                        <h4>Guante Tipo Cepillo</h4>
-                        <p class="card-text">
-                            Par de guantes tipo cepillo de todos los colores,perfectos para combinar el cariño con la limpieza.
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-lg-3 margentarjeta">
-                <div class="card text-center">
-                    <img class="card-img-top" src="{% static 'img/coches.jpg' %}">
-                    <br>
-                    <a id="carrito" class="btn btn-dark" href="#">Añadir al carrito</a>
-                    <h3>$34.990</h3>
-                    <div class="card-body">
-                        <h4>Coche</h4>
-                        <p class="card-text">
-                            Coche de paseo color negro para animales, con enganche para collar, material impermeable.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
