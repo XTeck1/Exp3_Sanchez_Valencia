@@ -17,7 +17,7 @@ def mision(request):
 
 def productos(request):
     productos = Producto.objects.all()
-    elementos_por_pagina = 8
+    elementos_por_pagina = 10
     paginator = Paginator(productos, elementos_por_pagina)
     page = request.GET.get('page')
     productos_paginados = paginator.get_page(page)
@@ -98,25 +98,33 @@ def eliminar_producto(request, id):
     carrito_compra = Carrito(request)
     producto = Producto.objects.get(codigo=id)
     carrito_compra.eliminar(producto=producto)
-    return redirect('productos')
+    return redirect('carrito')
 
 def restar_producto(request, id):
     carrito_compra = Carrito(request)
     producto = Producto.objects.get(codigo=id)
     carrito_compra.restar(producto=producto)
-    return redirect('productos')
+    return redirect('carrito')
 
 def limpiar_carrito(request):
     carrito_compra = Carrito(request)
     carrito_compra.limpiar()
-    return redirect('productos')
+    return redirect('carrito')
 
 #
+def detalle_carrito(request):
+    return render(request,'detallecarrito.html')
 
 def generarBoleta(request):
     precio_total = 0
+    subtotal = 0
+    username=""     
+    estado=""
     for key, value in request.session['carrito'].items():
+        username = request.user.username
         precio_total = precio_total + int(value['precio']) * int(value['cantidad'])
+        subtotal = 0
+        estado= "Procesando Pedido"  
         boleta = Boleta(total = precio_total)
         boleta.save()
         productos = []
@@ -140,4 +148,7 @@ def generarBoleta(request):
         'total':boleta.total
     }
     request.session['boleta'] = boleta.id_boleta
+    carrito = Carrito(request)
+    carrito.limpiar()
     carrito = Carrito(request, 'detallecarrito.html', datos)
+            

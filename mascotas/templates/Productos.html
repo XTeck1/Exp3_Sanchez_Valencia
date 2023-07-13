@@ -125,7 +125,7 @@
                             {{ prod.descripcion }}
                         </p>
                         {% if prod.stock > 0 %}
-                            <a id="carrito" class="btn btn-dark" href="{% url 'agregar' prod.codigo %}">Añadir al carrito</a>
+                            <a id="carrito" class="btn btn-dark" href="{% url 'agregar' prod.codigo %}" onclick="mostrarAlerta()">Añadir al carrito</a>
                         {% else %}
                             <p>Agotado!</p>
                         {% endif %}
@@ -133,6 +133,19 @@
                 </div>
             </div>
             {% endfor %}
+            {% if user.is_authenticated %}
+                <script>
+                    function mostrarAlerta() {
+                        alert("Añadido al carrito");
+                    }
+                </script>
+            {% else %}
+                <script>
+                    function mostrarAlerta() {
+                        alert("Logeo necesario");
+                    }
+                </script>
+            {% endif %}
 
             <div id="paginacion" class="pagination">
                 <span class="step-links">

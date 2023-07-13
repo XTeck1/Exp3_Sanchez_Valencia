@@ -1,6 +1,7 @@
 import datetime
 from tabnanny import verbose
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -27,6 +28,9 @@ class Boleta(models.Model):
     id_boleta = models.AutoField(primary_key=True)
     total = models.BigIntegerField()
     fechaCompra = models.DateTimeField(blank=False, null=False, default = datetime.datetime.now)
+    usuario = models.CharField (max_length=40,blank=True,verbose_name="usuario")
+    estado = models.TextField (max_length=40,blank=True,verbose_name="estado")
+    
 
     def __str__(self):
         return str(self.id_boleta)
